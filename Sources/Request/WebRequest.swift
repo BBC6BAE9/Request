@@ -44,12 +44,12 @@ public extension Error {
     }
 }
 
-enum ValidationError: Error {
+public enum ValidationError: Error {
     case argumentInvalid(message: String)
 }
 
-enum NoCookieSession {
-    static let session = Session(configuration: URLSessionConfiguration.ephemeral)
+public enum NoCookieSession {
+    public static let session = Session(configuration: URLSessionConfiguration.ephemeral)
 }
 
 public enum WebRequest {
