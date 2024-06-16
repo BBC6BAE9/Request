@@ -14,14 +14,14 @@ public class CookieHandler {
     let defaults = UserDefaults.standard
     let cookieStorage = HTTPCookieStorage.shared
 
-    func getCookie(forURL url: String) -> [HTTPCookie] {
+    public func getCookie(forURL url: String) -> [HTTPCookie] {
         let computedUrl = URL(string: url)
         let cookies = cookieStorage.cookies(for: computedUrl!) ?? []
 
         return cookies
     }
 
-    func backupCookies() {
+    public func backupCookies() {
         var cookieDict = [String: AnyObject]()
         for cookie in cookieStorage.cookies ?? [] {
             cookieDict[cookie.name] = cookie.properties as AnyObject?
@@ -30,11 +30,11 @@ public class CookieHandler {
         defaults.set(cookieDict, forKey: "SavedCookie")
     }
 
-    func removeCookie() {
+    public func removeCookie() {
         defaults.removeObject(forKey: "SavedCookie")
     }
 
-    func restoreCookies() {
+    public func restoreCookies() {
         if let cookieDictionary = defaults.dictionary(forKey: "SavedCookie") {
             for (_, cookieProperties) in cookieDictionary {
                 if let cookie = HTTPCookie(properties: cookieProperties as! [HTTPCookiePropertyKey: Any]) {
@@ -49,12 +49,12 @@ public class CookieHandler {
         backupCookies()
     }
 
-    func csrf() -> String? {
+    public func csrf() -> String? {
         let cookies = getCookie(forURL: "https://bilibili.com")
         return cookies.first(where: { $0.name == "bili_jct" })?.value
     }
 
-    func buvid3() -> String {
+    public func buvid3() -> String {
         let cookies = getCookie(forURL: "https://bilibili.com")
         return cookies.first(where: { $0.name == "buvid3" })?.value ?? ""
     }
