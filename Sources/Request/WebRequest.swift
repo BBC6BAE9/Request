@@ -30,8 +30,8 @@ public enum RequestError: LocalizedError {
     }
 }
 
-extension Error {
-    var code:Int? {
+public extension Error {
+    public var code:Int? {
         if let error = self as? RequestError {
             if case RequestError.statusFail(let code, _) = error {
                 return code
