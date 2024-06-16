@@ -227,7 +227,7 @@ public enum WebRequest {
         }
     }
     
-    static func requestPB<T: SwiftProtobuf.Message>(method: HTTPMethod = .get,
+    public static func requestPB<T: SwiftProtobuf.Message>(method: HTTPMethod = .get,
                                                     url: URLConvertible,
                                                     parameters: Parameters = [:],
                                                     headers: [String: String]? = nil,
